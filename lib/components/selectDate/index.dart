@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -19,9 +20,19 @@ class _NasaDateState extends State<NasaDate> {
   int yearValue = 2022;
   int mounthValue = 4;
   int dayValue = 10;
+  Map date = {};
   Map data = {};
 
-  
+  getPick(context , date) async {
+    Map copyData = await getPictureOfAnyDay(context , date);
+    if(data is DioError) {
+      print("algo salio mal");
+    }
+    setState(() {
+      data = copyData;
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +78,9 @@ class _NasaDateState extends State<NasaDate> {
       Column(
         children: [
           ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.red)
+            ),
             onPressed: () {
               setState(() {
                 show = !show;
@@ -80,6 +94,9 @@ class _NasaDateState extends State<NasaDate> {
             ),)),
             Row(
               children: [
+                SizedBox(
+                  width: 45,
+                ),
                 itemDate(
                   min: 1950,
                   max: 2022,
@@ -115,15 +132,12 @@ class _NasaDateState extends State<NasaDate> {
             ElevatedButton(
               onPressed: () async {
                 setState(() {
-                  data["year"] = yearValue;
-                  data["mount"] = mounthValue;
-                  data["day"] = dayValue;
-                  print(data);
+                  date["year"] = yearValue;
+                  date["mount"] = mounthValue;
+                  date["day"] = dayValue;
+                  showPhoto = true;
                 });
-                await getPictureOfAnyDay(context , data);
-                setState(() {
-                  
-                });
+                await getPick(context , date);
               }, 
               child: Text(
                 "Select date",
@@ -132,9 +146,29 @@ class _NasaDateState extends State<NasaDate> {
                   fontSize: 16
                 ),)
               ),
-              /* if(!showPhoto) (
+              if(showPhoto && data.isNotEmpty) (
+                Column(
+                  children: [
+                    Text(
+                      data["title"],
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black
+                    ),),
+                    Text(
+                      data["date"],
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black
+                    ),),
+                    Image.network(
+                      data["url"],
+                      width: 400,
+                      height: 200)
 
-              ) */
+                  ],
+                )
+              )
 
         ],
       )
