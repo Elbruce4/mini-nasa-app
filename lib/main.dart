@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'components/nasaAPOD/index.dart';
+import 'components/selectDate/index.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             NasaAPOD(),
+            NasaDate()
           ],
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.

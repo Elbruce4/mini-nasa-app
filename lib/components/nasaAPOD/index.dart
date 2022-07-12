@@ -44,16 +44,13 @@ class _NasaAPODState extends State<NasaAPOD> {
             (
             Column(
               children: [
-                Positioned(
-                  left: 100.00,
-                  child: GestureDetector(
-                    child: Icon(Icons.close, color: Color.fromARGB(255, 50, 24, 199)),
-                    onTap: () {
-                      setState(() {
-                        show = !show;
-                      });
-                    },
-                  ),
+                GestureDetector(
+                  child: Icon(Icons.close, color: Color.fromARGB(255, 50, 24, 199)),
+                  onTap: () {
+                    setState(() {
+                      show = !show;
+                    });
+                  },
                 ),
                 Image.network(data["url"]),
                 Text(
