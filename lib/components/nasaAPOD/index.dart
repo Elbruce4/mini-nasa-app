@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:loading_overlay/loading_overlay.dart';
 import 'package:nasaapp/api/APOD/index.dart';
 
 class NasaAPOD extends StatefulWidget {
@@ -14,11 +15,16 @@ class NasaAPOD extends StatefulWidget {
 class _NasaAPODState extends State<NasaAPOD> {
   var data;
   bool show = false;
+  bool loading = false;
 
   void getData () async {
+    setState(() {
+      loading = true;
+    });
     var info = await getPictireOfTheDay(context);
     setState(() {
       data = info;
+      loading = false;
     });
   }
 
@@ -39,36 +45,63 @@ class _NasaAPODState extends State<NasaAPOD> {
               show = !show;
             });}, child: Text("Show image of the day"))
           ),
-          if(show) (
-            (
-            Column(
-              children: [
-                GestureDetector(
-                  child: Icon(Icons.close, color: Color.fromARGB(255, 50, 24, 199)),
-                  onTap: () {
-                    setState(() {
-                      show = !show;
-                    });
-                  },
-                ),
-                Image.network(data["url"]),
-                Text(
-                  data["title"],
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black
-                  ),
-                ),
-                Text(
-                  data["date"],
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black
-                  ),
+          if(show) Container(
+            height: 500,
+            child: LoadingOverlay(
+              isLoading: loading,
+              color: Colors.black,
+                      opacity: 0.8,
+                      progressIndicator: CircularProgressIndicator(
+                        color: Color.fromARGB(255, 24, 40, 187),
+                        strokeWidth: 6,
+                      ),
+              child: (
+                (
+                Column(
+                  children: [
+                    GestureDetector(
+                      child: Icon(Icons.close, color: Color.fromARGB(255, 50, 24, 199)),
+                      onTap: () {
+                        setState(() {
+                          show = !show;
+                        });
+                      },
+                    ),
+                    Image.network(
+                      data["url"],
+                      loadingBuilder: (BuildContext context, Widget child,
+                        ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) {
+                            return child;
+                          }
+                          return Center(
+                            child: CircularProgressIndicator(
+                              value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                  : null,
+                            ),
+                          );
+                        },),
+                    Text(
+                      data["title"],
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black
+                      ),
+                    ),
+                    Text(
+                      data["date"],
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black
+                      ),
+                    )
+                  ],
                 )
-              ],
-            )
-            )
+                )
+              ),
+            ),
           ),
         ],
       ),
