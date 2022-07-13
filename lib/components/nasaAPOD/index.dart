@@ -105,7 +105,7 @@ class _NasaAPODState extends State<NasaAPOD> {
                     ),
                     RaisedButton(
                       onPressed: () {
-                        image_Downlader(data["url"]);
+                        image_Downlader(data["url"] , context);
                       },
                       child: Text("Download Image"),
                     )

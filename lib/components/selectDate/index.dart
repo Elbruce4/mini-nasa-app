@@ -204,7 +204,7 @@ class _NasaDateState extends State<NasaDate> {
                                     
                             RaisedButton(
                               onPressed: () {
-                                image_Downlader(data["url"]);
+                                image_Downlader(data["url"] , context);
                               },
                               child: Text("Download Image"),
                             )
