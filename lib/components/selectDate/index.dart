@@ -6,6 +6,7 @@ import 'package:numberpicker/numberpicker.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 
 import '../../api/APOD/index.dart';
+import '../../downlader/dowlandImage.dart';
 
 class NasaDate extends StatefulWidget {
   const NasaDate({Key? key}) : super(key: key);
@@ -199,7 +200,14 @@ class _NasaDateState extends State<NasaDate> {
                               );
                             },
                             width: 400,
-                            height: 200)
+                            height: 200),
+                                    
+                            RaisedButton(
+                              onPressed: () {
+                                image_Downlader(data["url"]);
+                              },
+                              child: Text("Download Image"),
+                            )
                   
                         ],
                       )

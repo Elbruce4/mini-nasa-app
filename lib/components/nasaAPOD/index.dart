@@ -5,6 +5,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:nasaapp/api/APOD/index.dart';
 
+import '../../downlader/dowlandImage.dart';
+
 class NasaAPOD extends StatefulWidget {
   const NasaAPOD({Key? key}) : super(key: key);
 
@@ -68,6 +70,7 @@ class _NasaAPODState extends State<NasaAPOD> {
                       },
                     ),
                     Image.network(
+                      
                       data["url"],
                       loadingBuilder: (BuildContext context, Widget child,
                         ImageChunkEvent? loadingProgress) {
@@ -82,7 +85,10 @@ class _NasaAPODState extends State<NasaAPOD> {
                                   : null,
                             ),
                           );
-                        },),
+                      },
+                      width: 400,
+                      height: 200,
+                      ),
                     Text(
                       data["title"],
                       style: TextStyle(
@@ -96,6 +102,12 @@ class _NasaAPODState extends State<NasaAPOD> {
                         fontSize: 15,
                         color: Colors.black
                       ),
+                    ),
+                    RaisedButton(
+                      onPressed: () {
+                        image_Downlader(data["url"]);
+                      },
+                      child: Text("Download Image"),
                     )
                   ],
                 )
