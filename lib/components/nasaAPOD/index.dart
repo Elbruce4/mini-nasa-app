@@ -20,7 +20,6 @@ class _NasaAPODState extends State<NasaAPOD> {
     setState(() {
       data = info;
     });
-    print("data: $data");
   }
 
   @override

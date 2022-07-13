@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 import 'components/nasaAPOD/index.dart';
 import 'components/selectDate/index.dart';
@@ -18,7 +19,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Nasa App'),
+      home: LoaderOverlay(
+        useDefaultLoading: false,
+        overlayColor: Colors.black,
+        overlayOpacity: 0.8,
+        child: const MyHomePage(title: 'Nasa App')),
     );
   }
 }
@@ -41,12 +46,17 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            NasaAPOD(),
-            NasaDate()
-          ],
+        child: SingleChildScrollView(
+          child: Container(
+            height: 1000,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                NasaAPOD(),
+                NasaDate()
+              ],
+            ),
+          ),
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );

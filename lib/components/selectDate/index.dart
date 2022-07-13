@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:numberpicker/numberpicker.dart';
+import 'package:loading_overlay/loading_overlay.dart';
 
 import '../../api/APOD/index.dart';
 
@@ -15,6 +16,7 @@ class NasaDate extends StatefulWidget {
 
 class _NasaDateState extends State<NasaDate> {
 
+  bool loading = false;
   bool show = false;
   bool showPhoto = false;
   int yearValue = 2022;
@@ -24,12 +26,18 @@ class _NasaDateState extends State<NasaDate> {
   Map data = {};
 
   getPick(context , date) async {
+    setState(() {
+      
+      loading = true;
+    });
     Map copyData = await getPictureOfAnyDay(context , date);
     if(data is DioError) {
-      print("algo salio mal");
     }
     setState(() {
       data = copyData;
+      print("data: $data");
+      showPhoto = true;
+      loading = false;
     });
 
   }
@@ -135,7 +143,7 @@ class _NasaDateState extends State<NasaDate> {
                   date["year"] = yearValue;
                   date["mount"] = mounthValue;
                   date["day"] = dayValue;
-                  showPhoto = true;
+                  
                 });
                 await getPick(context , date);
               }, 
@@ -146,29 +154,58 @@ class _NasaDateState extends State<NasaDate> {
                   fontSize: 16
                 ),)
               ),
-              if(showPhoto && data.isNotEmpty) (
-                Column(
-                  children: [
-                    Text(
-                      data["title"],
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black
-                    ),),
-                    Text(
-                      data["date"],
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black
-                    ),),
-                    Image.network(
-                      data["url"],
-                      width: 400,
-                      height: 200)
-
-                  ],
+              if(showPhoto && data.isNotEmpty) 
+              
+                Container(
+                  height: 600,
+                  child: LoadingOverlay(
+                    
+                    color: Colors.black,
+                    opacity: 0.8,
+                    progressIndicator: CircularProgressIndicator(
+                      color: Color.fromARGB(255, 24, 40, 187),
+                      strokeWidth: 6,
+                    ),
+                    isLoading: loading,
+                    child: (
+                      Column(
+                        children: [
+                          Text(
+                            data["title"],
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black
+                          ),),
+                          Text(
+                            data["date"],
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black
+                          ),),
+                          Image.network(
+                            data["url"],
+                            loadingBuilder: (BuildContext context, Widget child,
+                            ImageChunkEvent? loadingProgress) {
+                            if (loadingProgress == null) {
+                                return child;
+                              }
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  value: loadingProgress.expectedTotalBytes != null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                          loadingProgress.expectedTotalBytes!
+                                      : null,
+                                ),
+                              );
+                            },
+                            width: 400,
+                            height: 200)
+                  
+                        ],
+                      )
+                    ),
+                  ),
                 )
-              )
 
         ],
       )
