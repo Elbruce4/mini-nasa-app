@@ -53,14 +53,14 @@ class _PhotoWidgetState extends State<PhotoWidget> {
             widget.onData["title"],
             style: TextStyle(
               fontSize: 20,
-              color: Colors.black
+              color: Colors.white
             ),
           ),
           Text(
             widget.onData["date"],
             style: TextStyle(
               fontSize: 15,
-              color: Colors.black
+              color: Colors.white
             ),
           ),
           RaisedButton(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:nasaapp/components/Home.dart';
+import 'package:nasaapp/routes/index.dart';
 
 import 'components/nasaAPOD/index.dart';
 import 'components/selectDate/index.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: getRoutes(context),
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,

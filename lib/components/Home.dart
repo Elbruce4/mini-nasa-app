@@ -18,12 +18,34 @@ class _HomeState extends State<Home> {
     return Center(
         child: SingleChildScrollView(
           child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomRight,
+                stops: [0.4, 1],
+                colors: [Color(0xff0C0A26), Color.fromARGB(255, 60, 49, 179)],
+              ),
+            ),
+            width: 500,
             height: 1000,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                NasaAPOD(),
-                NasaDate()
+                Container(
+                  width: 400,
+                  height: 200,
+                  margin: EdgeInsets.only(
+                    left: 25
+                  ),
+                  child: Image.asset("assets/ilustrations/nasaLogo.png"),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    NasaAPOD(),
+                    NasaDate()
+                  ],
+                )
               ],
             ),
           ),

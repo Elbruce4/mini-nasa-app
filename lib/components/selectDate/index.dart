@@ -79,18 +79,27 @@ class _NasaDateState extends State<NasaDate> {
 
     return Container(
       child: !show ?
-      ElevatedButton(
-        onPressed: () {
-          setState(() {
-            show = !show;
-          });
-        }, 
-        child: Text(
-          "Select a date a see the picture of that day", 
-          style: TextStyle(
-            fontSize: 16,
-            color: Colors.white
-          ),))
+      Container(
+        width: 160,
+        height: 160,
+        decoration: BoxDecoration(
+          color: Color.fromRGBO(37, 32, 87, 0.5),
+          border: Border.all(color: const Color(0xff252057)),
+          borderRadius: BorderRadius.circular(30)
+        ),
+        child: ElevatedButton(
+          onPressed: () {
+            setState(() {
+              show = !show;
+            });
+          }, 
+          child: Text(
+            "Select a date a see the picture of that day", 
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.white
+            ),)),
+      )
       :
       Column(
         children: [

@@ -54,11 +54,20 @@ class _NasaAPODState extends State<NasaAPOD> {
     return Container(
       child: Column(
         children: [
-          if(!show)(
-            ElevatedButton(onPressed: () { setState(() {
-              show = !show;
-              getData();
-            });}, child: Text("Show image of the day"))
+          if(!show) Container(
+            width: 160,
+            height: 160,
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(37, 32, 87, 0.5),
+              border: Border.all(color: const Color(0xff252057)),
+              borderRadius: BorderRadius.circular(30)
+            ),
+            child: (
+              ElevatedButton(onPressed: () { setState(() {
+                show = !show;
+                getData();
+              });}, child: Text("Show image of the day"))
+            ),
           ),
           if(show) Container(
             height: 500,
