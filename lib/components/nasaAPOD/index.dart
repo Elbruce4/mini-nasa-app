@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:nasaapp/api/APOD/index.dart';
 
@@ -57,6 +58,35 @@ class _NasaAPODState extends State<NasaAPOD> {
       ),
       child: Column(
         children: [
+          Container(
+            margin: EdgeInsets.only(
+              left: 25
+            ),
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                      width: 50,
+                      margin: EdgeInsets.only(
+                          right: 20),
+                      child: SvgPicture.asset(
+                        'assets/icons/BackButton.svg',
+                      )),
+                ),
+                Image.asset(
+                  "assets/ilustrations/nasa.png",
+                  width: 100,
+                  height: 100,
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 70,
+          ),
           Container(
             height: 500,
             child: LoadingOverlay(

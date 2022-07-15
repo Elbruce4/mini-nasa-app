@@ -21,14 +21,8 @@ class _PhotoWidgetState extends State<PhotoWidget> {
     return Container(
       height: 500,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          GestureDetector(
-            child: Icon(Icons.close, color: Color.fromARGB(255, 50, 24, 199)),
-            onTap: () {
-                Navigator.pop(context);
-            },
-          ),
           Image.network(
             widget.onData["url"] ?? " ",
             loadingBuilder: (BuildContext context, Widget child,

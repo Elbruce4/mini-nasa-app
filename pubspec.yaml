@@ -42,6 +42,7 @@ dependencies:
   image_downloader: ^0.31.0
   fluttertoast: ^8.0.9
   motion_toast: ^2.2.2
+  flutter_svg: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +70,7 @@ flutter:
   assets:
     - assets/ilustrations/nasaLogo.png
     - assets/ilustrations/nasa.png
+    - assets/icons/BackButton.svg
     
 
   # An image asset can refer to one or more resolution-specific "variants", see
