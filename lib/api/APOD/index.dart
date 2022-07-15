@@ -24,6 +24,7 @@ getPictureOfAnyDay(context , Map data) async {
     return response.data;
 
   } catch (e) {
+    print("dio error: $e");
     return e;
   }
 

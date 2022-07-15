@@ -36,15 +36,10 @@ class _NasaAPODState extends State<NasaAPOD> {
       });
     }
   }
-
-  void changeShow () {
-    setState(() {
-      show = !show;
-    });
-  }
-
   @override
   void initState() {
+    print("esta en la pic del day");
+    getData();
     super.initState();
   }
 
@@ -52,24 +47,17 @@ class _NasaAPODState extends State<NasaAPOD> {
   Widget build(BuildContext context) {
     
     return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomRight,
+          stops: [0.4, 1],
+          colors: [Color(0xff0C0A26), Color.fromARGB(255, 60, 49, 179)],
+        ),
+      ),
       child: Column(
         children: [
-          if(!show) Container(
-            width: 160,
-            height: 160,
-            decoration: BoxDecoration(
-              color: Color.fromRGBO(37, 32, 87, 0.5),
-              border: Border.all(color: const Color(0xff252057)),
-              borderRadius: BorderRadius.circular(30)
-            ),
-            child: (
-              ElevatedButton(onPressed: () { setState(() {
-                show = !show;
-                getData();
-              });}, child: Text("Show image of the day"))
-            ),
-          ),
-          if(show) Container(
+          Container(
             height: 500,
             child: LoadingOverlay(
               isLoading: loading,
@@ -79,7 +67,7 @@ class _NasaAPODState extends State<NasaAPOD> {
                         color: Color.fromARGB(255, 24, 40, 187),
                         strokeWidth: 6,
                       ),
-              child: PhotoWidget( changeShow , data)
+              child: PhotoWidget(data ?? {})
             ),
           ),
         ],

@@ -29,26 +29,25 @@ class _NasaDateState extends State<NasaDate> {
   Map data = {};
 
   getPick(context , date) async {
-    setState(() {
-      loading = true;
-    });
-    Map copyData = await getPictureOfAnyDay(context , date);
-    if(copyData is DioError) {
-      showToast("Something went wrong", "error", 5, context);
-    } else {
+    try {
       setState(() {
-        data = copyData;
-        print("data: $data");
-        showPhoto = true;
-        loading = false;
+        loading = true;
       });
+      Map copyData = await getPictureOfAnyDay(context , date);
+      print(copyData);
+      if(copyData is DioError) {
+        showToast("Something went wrong", "error", 5, context);
+      } else {
+        setState(() {
+          data = copyData;
+          print("data: $data");
+          showPhoto = true;
+          loading = false;
+        });
+      }
+    } catch (e) {
+      showToast("Something went wrong", "error", 5, context);
     }
-  }
-
-  void setShow () {
-    setState(() {
-      showPhoto = false;
-    });
   }
 
   @override
@@ -69,7 +68,7 @@ class _NasaDateState extends State<NasaDate> {
           fontFamily: "Monserrat",
         ),
         selectedTextStyle: TextStyle(
-          color: Colors.black,
+          color: Colors.white,
           fontSize: 16,
           fontWeight: FontWeight.bold,
           fontFamily: "Monserrat",
@@ -78,39 +77,23 @@ class _NasaDateState extends State<NasaDate> {
     }
 
     return Container(
-      child: !show ?
-      Container(
-        width: 160,
-        height: 160,
-        decoration: BoxDecoration(
-          color: Color.fromRGBO(37, 32, 87, 0.5),
-          border: Border.all(color: const Color(0xff252057)),
-          borderRadius: BorderRadius.circular(30)
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomRight,
+          stops: [0.4, 1],
+          colors: [Color(0xff0C0A26), Color.fromARGB(255, 60, 49, 179)],
         ),
-        child: ElevatedButton(
-          onPressed: () {
-            setState(() {
-              show = !show;
-            });
-          }, 
-          child: Text(
-            "Select a date a see the picture of that day", 
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.white
-            ),)),
-      )
-      :
-      Column(
+      ),
+      child :Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ElevatedButton(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(Colors.red)
             ),
             onPressed: () {
-              setState(() {
-                show = !show;
-              });
+              Navigator.pop(context);
             },
             child: Text(
               "Hire this", 
@@ -171,7 +154,7 @@ class _NasaDateState extends State<NasaDate> {
                   fontSize: 16
                 ),)
               ),
-              if(showPhoto && data.isNotEmpty) PhotoWidget(setShow , data)
+              if(showPhoto && data.isNotEmpty) PhotoWidget(data)
             ],
       )
 

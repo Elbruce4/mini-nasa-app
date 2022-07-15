@@ -5,11 +5,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import '../../downlader/dowlandImage.dart';
 
 class PhotoWidget extends StatefulWidget {
-  Function onShow;
   Map onData;
 
   PhotoWidget(
-    this.onShow,
     this.onData
   );
 
@@ -23,15 +21,16 @@ class _PhotoWidgetState extends State<PhotoWidget> {
     return Container(
       height: 500,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GestureDetector(
             child: Icon(Icons.close, color: Color.fromARGB(255, 50, 24, 199)),
             onTap: () {
-                widget.onShow();
+                Navigator.pop(context);
             },
           ),
           Image.network(
-            widget.onData["url"],
+            widget.onData["url"] ?? " ",
             loadingBuilder: (BuildContext context, Widget child,
               ImageChunkEvent? loadingProgress) {
               if (loadingProgress == null) {
@@ -50,14 +49,14 @@ class _PhotoWidgetState extends State<PhotoWidget> {
             height: 200,
           ),
           Text(
-            widget.onData["title"],
+            widget.onData["title"] ?? " ",
             style: TextStyle(
               fontSize: 20,
               color: Colors.white
             ),
           ),
           Text(
-            widget.onData["date"],
+            widget.onData["date"] ?? " ",
             style: TextStyle(
               fontSize: 15,
               color: Colors.white

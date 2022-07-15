@@ -13,6 +13,28 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  Widget Card ({route ,  title}) {
+    
+    return Container(
+      width: 160,
+      height: 160,
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(37, 32, 87, 0.5),
+        border: Border.all(color: const Color(0xff252057)),
+        borderRadius: BorderRadius.circular(30)
+      ),
+      child: ElevatedButton(
+        onPressed: route,
+        child: Text(
+          title, 
+          style: const TextStyle(
+            fontSize: 16,
+            color: Colors.white
+          ),)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -42,8 +64,18 @@ class _HomeState extends State<Home> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    NasaAPOD(),
-                    NasaDate()
+                    Card(
+                      title: "See pic of the day",
+                      route: () {
+                        Navigator.pushNamed(context, "/PictureOfDay");
+                      }
+                    ),
+                    Card(
+                      title: "Select a date to see a special date",
+                      route: () {
+                        Navigator.pushNamed(context, "/SelectedDate");
+                      }
+                    )
                   ],
                 )
               ],
