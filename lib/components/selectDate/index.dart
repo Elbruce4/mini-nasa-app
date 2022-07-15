@@ -2,11 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:nasaapp/toast/index.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 
 import '../../api/APOD/index.dart';
 import '../../downlader/dowlandImage.dart';
+import '../photoWidget.dart/index.dart';
 
 class NasaDate extends StatefulWidget {
   const NasaDate({Key? key}) : super(key: key);
@@ -28,19 +30,25 @@ class _NasaDateState extends State<NasaDate> {
 
   getPick(context , date) async {
     setState(() {
-      
       loading = true;
     });
     Map copyData = await getPictureOfAnyDay(context , date);
-    if(data is DioError) {
+    if(copyData is DioError) {
+      showToast("Something went wrong", "error", 5, context);
+    } else {
+      setState(() {
+        data = copyData;
+        print("data: $data");
+        showPhoto = true;
+        loading = false;
+      });
     }
-    setState(() {
-      data = copyData;
-      print("data: $data");
-      showPhoto = true;
-      loading = false;
-    });
+  }
 
+  void setShow () {
+    setState(() {
+      showPhoto = false;
+    });
   }
 
   @override
@@ -49,7 +57,7 @@ class _NasaDateState extends State<NasaDate> {
     Widget itemDate({min,max,val,onChange}) {
       return NumberPicker(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(50),
           border: Border.all(color: const Color(0xff0F69B3), width: 2)),
         value: val,
         minValue: min,
@@ -58,13 +66,13 @@ class _NasaDateState extends State<NasaDate> {
           color: Colors.grey,
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          fontFamily: "MonserratBlod",
+          fontFamily: "Monserrat",
         ),
         selectedTextStyle: TextStyle(
           color: Colors.black,
           fontSize: 16,
           fontWeight: FontWeight.bold,
-          fontFamily: "MonserratBlod",
+          fontFamily: "Monserrat",
         ),
         onChanged: onChange);
     }
@@ -107,7 +115,7 @@ class _NasaDateState extends State<NasaDate> {
                   width: 45,
                 ),
                 itemDate(
-                  min: 1950,
+                  min: 1996,
                   max: 2022,
                   val: yearValue,
                   onChange: (val) {
@@ -144,7 +152,6 @@ class _NasaDateState extends State<NasaDate> {
                   date["year"] = yearValue;
                   date["mount"] = mounthValue;
                   date["day"] = dayValue;
-                  
                 });
                 await getPick(context , date);
               }, 
@@ -155,67 +162,8 @@ class _NasaDateState extends State<NasaDate> {
                   fontSize: 16
                 ),)
               ),
-              if(showPhoto && data.isNotEmpty) 
-              
-                Container(
-                  height: 600,
-                  child: LoadingOverlay(
-                    
-                    color: Colors.black,
-                    opacity: 0.8,
-                    progressIndicator: CircularProgressIndicator(
-                      color: Color.fromARGB(255, 24, 40, 187),
-                      strokeWidth: 6,
-                    ),
-                    isLoading: loading,
-                    child: (
-                      Column(
-                        children: [
-                          Text(
-                            data["title"],
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black
-                          ),),
-                          Text(
-                            data["date"],
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black
-                          ),),
-                          Image.network(
-                            data["url"],
-                            loadingBuilder: (BuildContext context, Widget child,
-                            ImageChunkEvent? loadingProgress) {
-                            if (loadingProgress == null) {
-                                return child;
-                              }
-                              return Center(
-                                child: CircularProgressIndicator(
-                                  value: loadingProgress.expectedTotalBytes != null
-                                      ? loadingProgress.cumulativeBytesLoaded /
-                                          loadingProgress.expectedTotalBytes!
-                                      : null,
-                                ),
-                              );
-                            },
-                            width: 400,
-                            height: 200),
-                                    
-                            RaisedButton(
-                              onPressed: () {
-                                image_Downlader(data["url"] , context);
-                              },
-                              child: Text("Download Image"),
-                            )
-                  
-                        ],
-                      )
-                    ),
-                  ),
-                )
-
-        ],
+              if(showPhoto && data.isNotEmpty) PhotoWidget(setShow , data)
+            ],
       )
 
     );

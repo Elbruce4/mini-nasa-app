@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:nasaapp/components/Home.dart';
 
 import 'components/nasaAPOD/index.dart';
 import 'components/selectDate/index.dart';
@@ -45,20 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Container(
-            height: 1000,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                NasaAPOD(),
-                NasaDate()
-              ],
-            ),
-          ),
-        ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      body: Home()// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

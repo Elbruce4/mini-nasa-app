@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -6,6 +7,8 @@ import 'package:loading_overlay/loading_overlay.dart';
 import 'package:nasaapp/api/APOD/index.dart';
 
 import '../../downlader/dowlandImage.dart';
+import '../../toast/index.dart';
+import '../photoWidget.dart/index.dart';
 
 class NasaAPOD extends StatefulWidget {
   const NasaAPOD({Key? key}) : super(key: key);
@@ -24,15 +27,24 @@ class _NasaAPODState extends State<NasaAPOD> {
       loading = true;
     });
     var info = await getPictireOfTheDay(context);
+    if (info is DioError) {
+      showToast("Something went wrong", "error", 5, context);
+    } else {
+      setState(() {
+        data = info;
+        loading = false;
+      });
+    }
+  }
+
+  void changeShow () {
     setState(() {
-      data = info;
-      loading = false;
+      show = !show;
     });
   }
 
   @override
   void initState() {
-    getData();
     super.initState();
   }
 
@@ -45,6 +57,7 @@ class _NasaAPODState extends State<NasaAPOD> {
           if(!show)(
             ElevatedButton(onPressed: () { setState(() {
               show = !show;
+              getData();
             });}, child: Text("Show image of the day"))
           ),
           if(show) Container(
@@ -57,62 +70,7 @@ class _NasaAPODState extends State<NasaAPOD> {
                         color: Color.fromARGB(255, 24, 40, 187),
                         strokeWidth: 6,
                       ),
-              child: (
-                (
-                Column(
-                  children: [
-                    GestureDetector(
-                      child: Icon(Icons.close, color: Color.fromARGB(255, 50, 24, 199)),
-                      onTap: () {
-                        setState(() {
-                          show = !show;
-                        });
-                      },
-                    ),
-                    Image.network(
-                      
-                      data["url"],
-                      loadingBuilder: (BuildContext context, Widget child,
-                        ImageChunkEvent? loadingProgress) {
-                        if (loadingProgress == null) {
-                            return child;
-                          }
-                          return Center(
-                            child: CircularProgressIndicator(
-                              value: loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded /
-                                      loadingProgress.expectedTotalBytes!
-                                  : null,
-                            ),
-                          );
-                      },
-                      width: 400,
-                      height: 200,
-                      ),
-                    Text(
-                      data["title"],
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black
-                      ),
-                    ),
-                    Text(
-                      data["date"],
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black
-                      ),
-                    ),
-                    RaisedButton(
-                      onPressed: () {
-                        image_Downlader(data["url"] , context);
-                      },
-                      child: Text("Download Image"),
-                    )
-                  ],
-                )
-                )
-              ),
+              child: PhotoWidget( changeShow , data)
             ),
           ),
         ],
