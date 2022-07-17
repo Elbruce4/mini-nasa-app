@@ -59,29 +59,51 @@ class _PhotoWidgetState extends State<PhotoWidget> {
   void initState() {
     super.initState();
     widgetInit();
-    SystemChrome.setPreferredOrientations([
+    /* SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
-    ]);
+    ]); */
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    SystemChrome.setPreferredOrientations([
+    /* SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
-  ]);
+    ]); */
   }
 
-/*   @override
-  void didChangeDependencies() {
-    setState(() {
-      args = ModalRoute.of(context)!.settings.arguments;
-    });
-    super.didChangeDependencies();
-  } */
+  Widget showOptions () {
+    return Card(
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton(
+          items: [
+            DropdownMenuItem(
+              value: "Download",
+              child: Center(
+                child: Text(
+                  "Download",
+                  style: TextStyle(fontSize: 32),
+                ),
+              ),
+            ),
+            DropdownMenuItem(
+              value: "Share",
+              child: Center(
+                child: Text(
+                  "Share",
+                  style: TextStyle(fontSize: 32),
+                ),
+              ),
+            )
+          ],
+          onChanged: (_) {},
+        ),
+      ),
+    );
+  }
 
   
   @override
@@ -93,12 +115,12 @@ class _PhotoWidgetState extends State<PhotoWidget> {
       decoration: BoxDecoration(
         image: args != null ? DecorationImage(
           image: NetworkImage(args["url"]),
-          fit: BoxFit.cover
+          fit: BoxFit.fitWidth
         )
         :
         null
       ),
-      height: 800,
+      height: 700,
       width: 400,
       margin: EdgeInsets.only(
         top: 30
@@ -113,25 +135,60 @@ class _PhotoWidgetState extends State<PhotoWidget> {
         isLoading: loading,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            GestureDetector(
+            /* GestureDetector(
               onTap: () {
                 Navigator.pop(context);
               },
               child: Container(
-                  width: 20,
+                  width: 50,
                   margin: EdgeInsets.only(
-                      right: 20),
+                      right: 40),
                   child: SvgPicture.asset(
                     'assets/icons/BackButton.svg',
                   )),
+                  ios_share_outlined
+            ), */
+            Card(
+              color: Colors.black,
+              child: IconButton(
+                  color: Colors.black,
+                  icon: Icon(
+                    Icons.arrow_back_ios_new_rounded,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
             ),
-            RaisedButton(
-              onPressed: () {
-                image_Downlader(args["url"] , context);
-              },
-              child: Text("Download Image"),
+            Card(
+              color: Colors.black,
+              child: IconButton(
+                  color: Colors.black,
+                  icon: Icon(
+                    Icons.ios_share_outlined,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+            ),
+            Card(
+              color: Colors.black,
+              child: IconButton(
+                  color: Colors.black,
+                  icon: Icon(
+                    Icons.arrow_circle_down,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    print("entra");
+                    image_Downlader(args["url"] , context);
+                  },
+                ),
             )
           ],
         ),
