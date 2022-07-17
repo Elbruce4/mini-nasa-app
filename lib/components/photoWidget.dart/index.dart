@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:nasaapp/api/APOD/index.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../downlader/dowlandImage.dart';
 import '../../storage/index.dart';
@@ -171,8 +172,8 @@ class _PhotoWidgetState extends State<PhotoWidget> {
                     Icons.ios_share_outlined,
                     color: Colors.white,
                   ),
-                  onPressed: () {
-                    Navigator.pop(context);
+                  onPressed: () async {
+                    await Share.share(args["url"]);
                   },
                 ),
             ),
