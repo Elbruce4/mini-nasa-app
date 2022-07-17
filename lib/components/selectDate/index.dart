@@ -35,17 +35,20 @@ class _NasaDateState extends State<NasaDate> {
         loading = true;
       });
       Map copyData = await getPictureOfAnyDay(context , date);
-      print(copyData);
       if(copyData is DioError) {
         showToast("Something went wrong", "error", 5, context);
       } else {
         setState(() {
           data = copyData;
-          print("data: $data");
           showPhoto = true;
           loading = false;
         });
       }
+      Navigator.pushNamed(
+        context,
+        '/ImageDetail',
+        arguments: data
+      );
     } catch (e) {
       showToast("Something went wrong", "error", 5, context);
     }
@@ -55,26 +58,29 @@ class _NasaDateState extends State<NasaDate> {
   Widget build(BuildContext context) {
 
     Widget itemDate({min,max,val,onChange}) {
-      return NumberPicker(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50),
-          border: Border.all(color: const Color(0xff0F69B3), width: 2)),
-        value: val,
-        minValue: min,
-        maxValue: max,
-        textStyle: TextStyle(
-          color: Colors.grey,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-          fontFamily: "Monserrat",
-        ),
-        selectedTextStyle: TextStyle(
-          color: Colors.white,
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-          fontFamily: "Monserrat",
-        ),
-        onChanged: onChange);
+      return Material(
+        type: MaterialType.transparency,
+        child: NumberPicker(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50),
+            border: Border.all(color: const Color(0xff0F69B3), width: 2)),
+          value: val,
+          minValue: min,
+          maxValue: max,
+          textStyle: const TextStyle(
+            color: Colors.grey,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            fontFamily: "Monserrat",
+          ),
+          selectedTextStyle: const TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            fontFamily: "Monserrat",
+          ),
+          onChanged: onChange),
+      );
     }
 
     return Container(
@@ -171,7 +177,7 @@ class _NasaDateState extends State<NasaDate> {
                 fontSize: 16
               ),)
             ),
-            if(showPhoto && data.isNotEmpty) PhotoWidget(data)
+            //if(showPhoto && data.isNotEmpty) PhotoWidget(data)
           ],
       )
 

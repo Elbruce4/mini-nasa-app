@@ -39,7 +39,6 @@ class _NasaAPODState extends State<NasaAPOD> {
   }
   @override
   void initState() {
-    print("esta en la pic del day");
     getData();
     super.initState();
   }
@@ -56,7 +55,7 @@ class _NasaAPODState extends State<NasaAPOD> {
           colors: [Color(0xff0C0A26), Color.fromARGB(255, 60, 49, 179)],
         ),
       ),
-      child: Column(
+      child: /* Column(
         children: [
           Container(
             margin: EdgeInsets.only(
@@ -97,11 +96,12 @@ class _NasaAPODState extends State<NasaAPOD> {
                         color: Color.fromARGB(255, 24, 40, 187),
                         strokeWidth: 6,
                       ),
-              child: PhotoWidget(data ?? {})
+              child: PhotoWidget(data);
             ),
           ),
         ],
-      ),
+      ), */
+      Container()
     );
   }
 }

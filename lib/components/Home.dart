@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:nasaapp/components/selectDate/index.dart';
+import 'package:nasaapp/storage/index.dart';
 
 import 'nasaAPOD/index.dart';
 
@@ -14,7 +15,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  Widget Card ({route ,  title}) {
+  Widget Card ({event ,  title}) {
     
     return Container(
       width: 160,
@@ -25,7 +26,7 @@ class _HomeState extends State<Home> {
         borderRadius: BorderRadius.circular(30)
       ),
       child: ElevatedButton(
-        onPressed: route,
+        onPressed: event,
         child: Text(
           title, 
           style: const TextStyle(
@@ -57,7 +58,7 @@ class _HomeState extends State<Home> {
                   width: 400,
                   height: 200,
                   margin: EdgeInsets.only(
-                    left: 25
+                    left: 25,
                   ),
                   child: Image.asset("assets/ilustrations/nasaLogo.png"),
                 ),
@@ -66,14 +67,16 @@ class _HomeState extends State<Home> {
                   children: [
                     Card(
                       title: "See pic of the day",
-                      route: () {
-                        Navigator.pushNamed(context, "/PictureOfDay");
+                      event: () async {
+                        Navigator.pushNamed(context, "/ImageDetail");
+                        await writeData("picOfDay", "pic");
                       }
                     ),
                     Card(
                       title: "Select a date to see a special date",
-                      route: () {
+                      event: () async {
                         Navigator.pushNamed(context, "/SelectedDate");
+                        await writeData("selectDate", "pic");
                       }
                     )
                   ],
