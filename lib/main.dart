@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:nasaapp/components/Home.dart';
 import 'package:nasaapp/routes/index.dart';
@@ -7,7 +8,14 @@ import 'components/nasaAPOD/index.dart';
 import 'components/selectDate/index.dart';
 
 void main() {
-  runApp(const MyApp());
+  
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((_) {
+    runApp(const MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
