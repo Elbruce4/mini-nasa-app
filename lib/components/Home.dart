@@ -50,7 +50,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             width: 500,
-            height: 1000,
+            height: 700,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -62,8 +62,7 @@ class _HomeState extends State<Home> {
                   ),
                   child: Image.asset("assets/ilustrations/nasaLogo.png"),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                Wrap(
                   children: [
                     Card(
                       title: "See pic of the day",
@@ -77,6 +76,12 @@ class _HomeState extends State<Home> {
                       event: () async {
                         Navigator.pushNamed(context, "/SelectedDate");
                         await writeData("selectDate", "pic");
+                      }
+                    ),
+                    Card(
+                      title: "Watch near earths asteroid data according to date",
+                      event: () async {
+                        Navigator.pushNamed(context, "/DateNearAsteroids");
                       }
                     )
                   ],

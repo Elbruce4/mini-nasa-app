@@ -8,7 +8,6 @@ import 'components/nasaAPOD/index.dart';
 import 'components/selectDate/index.dart';
 
 void main() {
-  
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

@@ -8,6 +8,7 @@ import 'package:numberpicker/numberpicker.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 
 import '../../api/APOD/index.dart';
+import '../../dateWidget/index.dart';
 import '../../downlader/dowlandImage.dart';
 import '../photoWidget.dart/index.dart';
 
@@ -57,32 +58,6 @@ class _NasaDateState extends State<NasaDate> {
   @override
   Widget build(BuildContext context) {
 
-    Widget itemDate({min,max,val,onChange}) {
-      return Material(
-        type: MaterialType.transparency,
-        child: NumberPicker(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50),
-            border: Border.all(color: const Color(0xff0F69B3), width: 2)),
-          value: val,
-          minValue: min,
-          maxValue: max,
-          textStyle: const TextStyle(
-            color: Colors.grey,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            fontFamily: "Monserrat",
-          ),
-          selectedTextStyle: const TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            fontFamily: "Monserrat",
-          ),
-          onChanged: onChange),
-      );
-    }
-
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -129,7 +104,7 @@ class _NasaDateState extends State<NasaDate> {
               SizedBox(
                 width: 45,
               ),
-              itemDate(
+              Dates(
                 min: 1996,
                 max: 2022,
                 val: yearValue,
@@ -139,7 +114,7 @@ class _NasaDateState extends State<NasaDate> {
                   });
                 }
               ),
-              itemDate(
+              Dates(
                 min: 1,
                 max: 12,
                 val: mounthValue,
@@ -149,7 +124,7 @@ class _NasaDateState extends State<NasaDate> {
                   });
                 }
               ),
-              itemDate(
+              Dates(
                 min: 1,
                 max: 31,
                 val: dayValue,
