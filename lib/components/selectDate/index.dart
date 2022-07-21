@@ -10,6 +10,7 @@ import 'package:loading_overlay/loading_overlay.dart';
 import '../../api/APOD/index.dart';
 import '../../dateWidget/index.dart';
 import '../../downlader/dowlandImage.dart';
+import '../../reUsed/headerPop.dart';
 import '../photoWidget.dart/index.dart';
 
 class NasaDate extends StatefulWidget {
@@ -70,32 +71,7 @@ class _NasaDateState extends State<NasaDate> {
       child :Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Container(
-            margin: EdgeInsets.only(
-              left: 25
-            ),
-            child: Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Container(
-                      width: 50,
-                      margin: EdgeInsets.only(
-                          right: 20),
-                      child: SvgPicture.asset(
-                        'assets/icons/BackButton.svg',
-                      )),
-                ),
-                Image.asset(
-                  "assets/ilustrations/nasa.png",
-                  width: 100,
-                  height: 100,
-                )
-              ],
-            ),
-          ),
+          HeaderPop(),
           SizedBox(
             height: 70,
           ),

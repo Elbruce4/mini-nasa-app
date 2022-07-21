@@ -5,6 +5,7 @@ import 'package:loading_overlay/loading_overlay.dart';
 import 'package:nasaapp/components/asteroid/detailEachAsteroid.dart';
 import 'package:nasaapp/components/asteroid/startAndEndDate.dart';
 
+import '../../reUsed/headerPop.dart';
 import '../selectDate/index.dart';
 
 class NearAstheroid extends StatefulWidget {
@@ -66,8 +67,9 @@ class _NearAstheroidState extends State<NearAstheroid> {
         ),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          HeaderPop(),
           LoadingOverlay(
             isLoading: loading,
             child: Material(
@@ -88,7 +90,7 @@ class _NearAstheroidState extends State<NearAstheroid> {
                 ), 
                 SingleChildScrollView(
                   child: Container(
-                    height: 600,
+                    height: 550,
                     child: GridView.count(
                       crossAxisCount: 2,
                       children: [

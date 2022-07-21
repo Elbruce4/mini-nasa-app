@@ -8,6 +8,7 @@ import 'package:loading_overlay/loading_overlay.dart';
 import 'package:nasaapp/dateWidget/index.dart';
 
 import '../../api/ASTEROIDS/index.dart';
+import '../../reUsed/headerPop.dart';
 import '../../toast/index.dart';
 
 class SelectDate extends StatefulWidget {
@@ -74,32 +75,7 @@ class _SelectDateState extends State<SelectDate> {
         child :Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
-              margin: EdgeInsets.only(
-                left: 25
-              ),
-              child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                        width: 50,
-                        margin: EdgeInsets.only(
-                            right: 20),
-                        child: SvgPicture.asset(
-                          'assets/icons/BackButton.svg',
-                        )),
-                  ),
-                  Image.asset(
-                    "assets/ilustrations/nasa.png",
-                    width: 100,
-                    height: 100,
-                  )
-                ],
-              ),
-            ),
+            HeaderPop(),
             Material(
               type: MaterialType.transparency,
               child: Center(
