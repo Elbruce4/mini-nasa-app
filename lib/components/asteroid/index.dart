@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:loading_overlay/loading_overlay.dart';
-import 'package:nasaapp/components/asteroid/detailEachAsteroid.dart';
+import 'package:nasaapp/components/asteroid/detailAsteroid.dart';
 import 'package:nasaapp/components/asteroid/startAndEndDate.dart';
 
 import '../../reUsed/headerPop.dart';
@@ -81,16 +81,16 @@ class _NearAstheroidState extends State<NearAstheroid> {
                     Navigator.pop(context);
                   },
                   child: Text(
-                   "Asteroids founded on that date: ${info["data"]["element_count"]}", 
+                   "${info["data"]["element_count"]} Asteroids founded on that date: ", 
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 30
+                      fontSize: 20
                     ),
                   ),
                 ), 
                 SingleChildScrollView(
                   child: Container(
-                    height: 550,
+                    height: 625,
                     child: GridView.count(
                       crossAxisCount: 2,
                       children: [
@@ -98,7 +98,8 @@ class _NearAstheroidState extends State<NearAstheroid> {
                             (obj) {
                               return DetailAsteroids(
                                 id: obj["id"],
-                                name: obj["name"]
+                                name: obj["name"],
+                                data: obj
                               );
                             })
                       ],

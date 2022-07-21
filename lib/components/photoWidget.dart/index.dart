@@ -138,19 +138,6 @@ class _PhotoWidgetState extends State<PhotoWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            /* GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Container(
-                  width: 50,
-                  margin: EdgeInsets.only(
-                      right: 40),
-                  child: SvgPicture.asset(
-                    'assets/icons/BackButton.svg',
-                  )),
-                  ios_share_outlined
-            ), */
             Card(
               color: Colors.black,
               child: IconButton(

@@ -1,6 +1,7 @@
 
 
 import '../components/Home.dart';
+import '../components/asteroid/eachAsteroidDetail.dart';
 import '../components/asteroid/index.dart';
 import '../components/asteroid/startAndEndDate.dart';
 import '../components/nasaAPOD/index.dart';
@@ -12,6 +13,7 @@ getRoutes(context) {
     '/SelectedDate': (context) => NasaDate(),
     '/ImageDetail': (context) => PhotoWidget(),
     '/DateNearAsteroids': (context) => SelectDate(),
-    '/Asteroids': (context) => NearAstheroid()
+    '/Asteroids': (context) => NearAstheroid(),
+    '/EachAsteroidDetail': (context) => EachAsteroidDetail()
   };
 }
