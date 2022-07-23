@@ -83,6 +83,12 @@ class _HomeState extends State<Home> {
                       event: () async {
                         Navigator.pushNamed(context, "/DateNearAsteroids");
                       }
+                    ),
+                    Card(
+                      title: "Home many peolple are in the space rigth now?",
+                      event: () async {
+                        Navigator.pushNamed(context, "/PeopleInSpace");
+                      }
                     )
                   ],
                 )

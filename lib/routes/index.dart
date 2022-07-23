@@ -5,6 +5,7 @@ import '../components/asteroid/eachAsteroidDetail.dart';
 import '../components/asteroid/index.dart';
 import '../components/asteroid/startAndEndDate.dart';
 import '../components/nasaAPOD/index.dart';
+import '../components/peopleOnSpace/index.dart';
 import '../components/photoWidget.dart/index.dart';
 import '../components/selectDate/index.dart';
 
@@ -14,6 +15,7 @@ getRoutes(context) {
     '/ImageDetail': (context) => PhotoWidget(),
     '/DateNearAsteroids': (context) => SelectDate(),
     '/Asteroids': (context) => NearAstheroid(),
-    '/EachAsteroidDetail': (context) => EachAsteroidDetail()
+    '/EachAsteroidDetail': (context) => EachAsteroidDetail(),
+    '/PeopleInSpace': (context) => PeolpleInSpace()
   };
 }
