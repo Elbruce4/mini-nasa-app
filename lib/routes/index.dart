@@ -1,6 +1,7 @@
 
 
 import '../components/Home.dart';
+import '../components/SolarSystema/SolarSystem.dart';
 import '../components/asteroid/eachAsteroidDetail.dart';
 import '../components/asteroid/index.dart';
 import '../components/asteroid/startAndEndDate.dart';
@@ -16,6 +17,7 @@ getRoutes(context) {
     '/DateNearAsteroids': (context) => SelectDate(),
     '/Asteroids': (context) => NearAstheroid(),
     '/EachAsteroidDetail': (context) => EachAsteroidDetail(),
-    '/PeopleInSpace': (context) => PeolpleInSpace()
+    '/PeopleInSpace': (context) => PeolpleInSpace(),
+    '/SolarSystem': (context) => SolarSystem()
   };
 }

@@ -89,6 +89,12 @@ class _HomeState extends State<Home> {
                       event: () async {
                         Navigator.pushNamed(context, "/PeopleInSpace");
                       }
+                    ),
+                    Card(
+                      title: "Solar System Planet data",
+                      event: () async {
+                        Navigator.pushNamed(context, "/SolarSystem");
+                      }
                     )
                   ],
                 )
