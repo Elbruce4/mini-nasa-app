@@ -59,6 +59,22 @@ class _SolarSystemState extends State<SolarSystem> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const HeaderPop(),
+            Material(
+              type: MaterialType.transparency,
+              child: Container(
+                margin: EdgeInsets.only(
+                  left: 15,
+                  bottom: 20
+                ),
+                child: Text(
+                  "Watch all detail info abaout your favorite planet of the solar system",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16
+                  ),
+                ),
+              ),
+            ),
             if(data != null) SingleChildScrollView(
               child: (
                 Container(
@@ -68,9 +84,8 @@ class _SolarSystemState extends State<SolarSystem> {
                     children: [
                       ...data.map((obj) {
                         return DataPlanets(
-                          name: obj["name"], 
-                          mas :obj["mass"]["massValue"] , 
-                          vol: obj["vol"]["volValue"]);
+                          name: obj["englishName"], 
+                          data: obj);
                       })
                     ],
                   ),

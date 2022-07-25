@@ -1,6 +1,7 @@
 
 
 import '../components/Home.dart';
+import '../components/SolarSystema/DetailPlanet.dart';
 import '../components/SolarSystema/SolarSystem.dart';
 import '../components/asteroid/eachAsteroidDetail.dart';
 import '../components/asteroid/index.dart';
@@ -18,6 +19,7 @@ getRoutes(context) {
     '/Asteroids': (context) => NearAstheroid(),
     '/EachAsteroidDetail': (context) => EachAsteroidDetail(),
     '/PeopleInSpace': (context) => PeolpleInSpace(),
-    '/SolarSystem': (context) => SolarSystem()
+    '/SolarSystem': (context) => SolarSystem(),
+    '/DetailPlanet': (context) => DetailPlanet(),
   };
 }
