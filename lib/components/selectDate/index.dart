@@ -60,6 +60,9 @@ class _NasaDateState extends State<NasaDate> {
   Widget build(BuildContext context) {
 
     return Container(
+      margin: EdgeInsets.only(
+        top: 25
+      ),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topRight,

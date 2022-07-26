@@ -74,6 +74,14 @@ flutter:
     - assets/ilustrations/nasaLogo.png
     - assets/ilustrations/nasa.png
     - assets/icons/BackButton.svg
+    - assets/ilustrations/manLift.svg
+    - assets/ilustrations/man_presenting.svg
+    - assets/ilustrations/women_hand.svg
+    - assets/ilustrations/women_sitting.svg
+    - assets/ilustrations/meteorite.png
+    - assets/ilustrations/alien.png
+    - assets/ilustrations/rocket.png
+    - assets/ilustrations/worlwide.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

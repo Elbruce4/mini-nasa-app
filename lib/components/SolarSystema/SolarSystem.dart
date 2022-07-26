@@ -56,7 +56,7 @@ class _SolarSystemState extends State<SolarSystem> {
           ),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const HeaderPop(),
             Material(
@@ -64,7 +64,8 @@ class _SolarSystemState extends State<SolarSystem> {
               child: Container(
                 margin: EdgeInsets.only(
                   left: 15,
-                  bottom: 20
+                  bottom: 20,
+                  top: 10
                 ),
                 child: Text(
                   "Watch all detail info abaout your favorite planet of the solar system",
@@ -78,7 +79,7 @@ class _SolarSystemState extends State<SolarSystem> {
             if(data != null) SingleChildScrollView(
               child: (
                 Container(
-                  height: 625,
+                  height: 550,
                   child: GridView.count(
                     crossAxisCount: 2,
                     children: [

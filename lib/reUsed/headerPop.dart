@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,31 +14,32 @@ class HeaderPop extends StatefulWidget {
 class _HeaderPopState extends State<HeaderPop> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(
-        left: 25
-      ),
-      child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
+    return Material(
+      child: Container(
+        color: Color.fromARGB(255, 14, 14, 15),
+        margin: EdgeInsets.only(
+          left: 0
+        ),
+        child: Row(
+                  children: [
+                    IconButton(
+                    color: Colors.black,
+                    icon: Icon(
+                      Icons.arrow_back_ios_new_rounded,
+                      color: Colors.white
+                    ),
+                    onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Container(
-                        width: 50,
-                        margin: EdgeInsets.only(
-                            right: 20),
-                        child: SvgPicture.asset(
-                          'assets/icons/BackButton.svg',
-                        )),
                   ),
-                  Image.asset(
-                    "assets/ilustrations/nasa.png",
-                    width: 100,
-                    height: 100,
-                  )
-                ],
-              ),
+                    Image.asset(
+                      "assets/ilustrations/nasa.png",
+                      width: 100,
+                      height: 100,
+                    )
+                  ],
+                ),
+      ),
     );
   }
 }
