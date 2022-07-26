@@ -40,6 +40,9 @@ class _DatesState extends State<Dates> {
                 fontSize: 15
               ),),
           ),
+          SizedBox(
+            height: 15,
+          ),
           Material(
             type: MaterialType.transparency,
             child: NumberPicker(

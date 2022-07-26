@@ -69,7 +69,7 @@ class _SelectDateState extends State<SelectDate> {
             begin: Alignment.topRight,
             end: Alignment.bottomRight,
             stops: [0.4, 1],
-            colors: [Color(0xff0C0A26), Color.fromARGB(255, 60, 49, 179)],
+            colors: [Color(0xff0C0A26), Color.fromARGB(255, 161, 5, 135)],
           ),
         ),
         child :Column(

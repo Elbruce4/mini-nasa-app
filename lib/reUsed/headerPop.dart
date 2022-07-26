@@ -16,29 +16,30 @@ class _HeaderPopState extends State<HeaderPop> {
   Widget build(BuildContext context) {
     return Material(
       child: Container(
+        
         color: Color.fromARGB(255, 14, 14, 15),
         margin: EdgeInsets.only(
           left: 0
         ),
         child: Row(
-                  children: [
-                    IconButton(
-                    color: Colors.black,
-                    icon: Icon(
-                      Icons.arrow_back_ios_new_rounded,
-                      color: Colors.white
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                    Image.asset(
-                      "assets/ilustrations/nasa.png",
-                      width: 100,
-                      height: 100,
-                    )
-                  ],
-                ),
+          children: [
+            IconButton(
+            color: Colors.black,
+            icon: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Colors.white
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+            Image.asset(
+              "assets/ilustrations/nasa.png",
+              width: 100,
+              height: 100,
+            )
+          ],
+        ),
       ),
     );
   }

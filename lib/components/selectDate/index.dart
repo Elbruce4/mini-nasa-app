@@ -69,8 +69,8 @@ class _NasaDateState extends State<NasaDate> {
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomRight,
-            stops: [0.4, 1],
-            colors: [Color(0xff0C0A26), Color.fromARGB(255, 60, 49, 179)],
+            stops: [0.2, 1],
+            colors: [Color(0xff0C0A26), Color.fromARGB(255, 179, 123, 49)],
           ),
         ),
         child :Column(
