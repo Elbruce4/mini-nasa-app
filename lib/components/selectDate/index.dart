@@ -59,82 +59,100 @@ class _NasaDateState extends State<NasaDate> {
   @override
   Widget build(BuildContext context) {
 
-    return Container(
-      margin: EdgeInsets.only(
-        top: 25
-      ),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomRight,
-          stops: [0.4, 1],
-          colors: [Color(0xff0C0A26), Color.fromARGB(255, 60, 49, 179)],
+    return Material(
+      type: MaterialType.transparency,
+      child: Container(
+        margin: EdgeInsets.only(
+          top: 25
         ),
-      ),
-      child :Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          HeaderPop(),
-          SizedBox(
-            height: 70,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomRight,
+            stops: [0.4, 1],
+            colors: [Color(0xff0C0A26), Color.fromARGB(255, 60, 49, 179)],
           ),
-          Row(
-            children: [
-              SizedBox(
-                width: 45,
-              ),
-              Dates(
-                min: 1996,
-                max: 2022,
-                val: yearValue,
-                onChange: (val) {
-                  setState(() {
-                    yearValue = val;
-                  });
-                }
-              ),
-              Dates(
-                min: 1,
-                max: 12,
-                val: mounthValue,
-                onChange: (val) {
-                  setState(() {
-                    mounthValue = val;
-                  });
-                }
-              ),
-              Dates(
-                min: 1,
-                max: 31,
-                val: dayValue,
-                onChange: (val) {
-                  setState(() {
-                    dayValue = val;
-                  });
-                }
-              ),
-            ],
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              setState(() {
-                date["year"] = yearValue;
-                date["mount"] = mounthValue;
-                date["day"] = dayValue;
-              });
-              await getPick(context , date);
-            }, 
-            child: Text(
-              "Select date",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16
-              ),)
+        ),
+        child :Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            HeaderPop(),
+            SizedBox(
+              height: 30,
             ),
-            //if(showPhoto && data.isNotEmpty) PhotoWidget(data)
-          ],
-      )
-
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Text(
+                "The nasa give us the possibillity to watch the photo of the day of any date you want! Just select your favorite day and watch!",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16
+                ),),
+            ),
+            SizedBox(
+              height: 90,
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 45,
+                ),
+                Dates(
+                  type: "Year",
+                  min: 1996,
+                  max: 2022,
+                  val: yearValue,
+                  onChange: (val) {
+                    setState(() {
+                      yearValue = val;
+                    });
+                  }
+                ),
+                Dates(
+                  type: "Mounth",
+                  min: 1,
+                  max: 12,
+                  val: mounthValue,
+                  onChange: (val) {
+                    setState(() {
+                      mounthValue = val;
+                    });
+                  }
+                ),
+                Dates(
+                  type: "Day",
+                  min: 1,
+                  max: 31,
+                  val: dayValue,
+                  onChange: (val) {
+                    setState(() {
+                      dayValue = val;
+                    });
+                  }
+                ),
+              ],
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                setState(() {
+                  date["year"] = yearValue;
+                  date["mount"] = mounthValue;
+                  date["day"] = dayValue;
+                });
+                await getPick(context , date);
+              }, 
+              child: Text(
+                "Select date",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16
+                ),)
+              ),
+              //if(showPhoto && data.isNotEmpty) PhotoWidget(data)
+            ],
+        )
+    
+      ),
     );
   }
 }

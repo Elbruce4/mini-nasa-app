@@ -76,9 +76,13 @@ class _SelectDateState extends State<SelectDate> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             HeaderPop(),
+            SizedBox(
+              height: 30,
+            ),
             Material(
               type: MaterialType.transparency,
-              child: Center(
+              child: Container(
+                margin: EdgeInsets.all(10),
                 child: Text(
                   "In this space you can access to info abaout asterois which pass near our planet on an specific date!",
                   style: TextStyle(
@@ -87,12 +91,16 @@ class _SelectDateState extends State<SelectDate> {
                   ),),
               ),
             ),
+            SizedBox(
+              height: 90,
+            ),
             Row(
               children: [
                 SizedBox(
                   width: 45,
                 ),
                 Dates(
+                  type: "Year",
                   min: 1996,
                   max: 2022,
                   val: yearValue,
@@ -103,6 +111,7 @@ class _SelectDateState extends State<SelectDate> {
                   }
                 ),
                 Dates(
+                  type: "Mounth",
                   min: 1,
                   max: 12,
                   val: mounthValue,
@@ -113,6 +122,7 @@ class _SelectDateState extends State<SelectDate> {
                   }
                 ),
                 Dates(
+                  type: "Day",
                   min: 1,
                   max: 31,
                   val: dayValue,
