@@ -85,7 +85,7 @@ class _SolarSystemState extends State<SolarSystem> {
                     children: [
                       ...data.map((obj) {
                         return DataPlanets(
-                          name: obj["englishName"], 
+                          name: obj["englishName"],
                           data: obj);
                       })
                     ],

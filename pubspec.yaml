@@ -82,6 +82,14 @@ flutter:
     - assets/ilustrations/alien.png
     - assets/ilustrations/rocket.png
     - assets/ilustrations/worlwide.png
+    - assets/ilustrations/neptune.png
+    - assets/ilustrations/jupiter.png
+    - assets/ilustrations/mars.png
+    - assets/ilustrations/mercury.png
+    - assets/ilustrations/saturn.png
+    - assets/ilustrations/uranus.png
+    - assets/ilustrations/venus.png
+    - assets/ilustrations/planet-earth.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see
