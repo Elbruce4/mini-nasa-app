@@ -92,7 +92,7 @@ class _NearAstheroidState extends State<NearAstheroid> {
                   child: Container(
                     height: 625,
                     child: GridView.count(
-                      crossAxisCount: 2,
+                      crossAxisCount: 3,
                       children: [
                           ...info["data"]["near_earth_objects"].values.elementAt(0).map(
                             (obj) {

@@ -90,6 +90,10 @@ flutter:
     - assets/ilustrations/uranus.png
     - assets/ilustrations/venus.png
     - assets/ilustrations/planet-earth.png
+    - assets/ilustrations/asteroid.png
+    - assets/ilustrations/meteor.png
+    - assets/ilustrations/meteortie-crash.png
+    - assets/ilustrations/earth-crash.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

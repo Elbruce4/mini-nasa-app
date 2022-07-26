@@ -31,10 +31,12 @@ class _DetailAsteroidsState extends State<DetailAsteroids> {
           arguments: widget.data);
       },
       child: Container(
+        
         decoration: BoxDecoration(
-          color: const Color(0xff252057),
-          border: Border.all(color: Color.fromARGB(255, 255, 255, 255)),
-          borderRadius: BorderRadius.circular(30)
+          image: DecorationImage(
+            image: (int.parse(widget.id) % 2) == 0 ? AssetImage("assets/ilustrations/asteroid.png") : AssetImage("assets/ilustrations/meteor.png"),
+            fit: BoxFit.cover
+          ),
         ),
         margin: EdgeInsets.all(10),
         width: 50,
@@ -45,15 +47,17 @@ class _DetailAsteroidsState extends State<DetailAsteroids> {
             Text(
               widget.name,
               style: TextStyle(
+                fontWeight: FontWeight.bold,
                 color: Colors.white,
-                fontSize: 24
+                fontSize: 16
               ),
             ),
             Text(
               "ID: ${widget.id}",
               style: TextStyle(
+                fontWeight: FontWeight.bold,
                 color: Colors.white,
-                fontSize: 16
+                fontSize: 12
               ),
             ),
           ],
