@@ -17,7 +17,7 @@ class _HeaderPopState extends State<HeaderPop> {
     return Material(
       child: Container(
         
-        color: Color.fromARGB(255, 14, 14, 15),
+        color: Color(0xff0C0A26),
         margin: EdgeInsets.only(
           left: 0
         ),

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_downloader/image_downloader.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:nasaapp/api/APOD/index.dart';
 import 'package:share_plus/share_plus.dart';
@@ -23,6 +24,7 @@ class _PhotoWidgetState extends State<PhotoWidget> {
 
   var args;
   var key;
+  var _progress;
   bool loading = false;
 
 
@@ -42,6 +44,7 @@ class _PhotoWidgetState extends State<PhotoWidget> {
       });
     } else if( key == "picOfDay") {
       var info = await getPictireOfTheDay(context);
+      print("info: $info");
       if (info is DioError) {
         showToast("Something went wrong", "error", 5, context);
       } else {
@@ -60,11 +63,17 @@ class _PhotoWidgetState extends State<PhotoWidget> {
   void initState() {
     super.initState();
     widgetInit();
+    ImageDownloader.callback(onProgressUpdate: (String? imageId, int progress) {
+      setState(() {
+        _progress = progress;
+      });
+    });
     /* SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
     ]); */
   }
+
 
   @override
   void dispose() {
@@ -134,51 +143,68 @@ class _PhotoWidgetState extends State<PhotoWidget> {
           strokeWidth: 6,
         ),
         isLoading: loading,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Card(
-              color: Colors.black,
-              child: IconButton(
-                  color: Colors.black,
-                  icon: Icon(
-                    Icons.arrow_back_ios_new_rounded,
-                    color: Colors.white,
+          children:[
+            Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Card(
+                color: Colors.black,
+                child: IconButton(
+                    color: Colors.black,
+                    icon: Icon(
+                      Icons.arrow_back_ios_new_rounded,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                   ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
+              ),
+              Card(
+                color: Colors.black,
+                child: IconButton(
+                    color: Colors.black,
+                    icon: Icon(
+                      Icons.ios_share_outlined,
+                      color: Colors.white,
+                    ),
+                    onPressed: () async {
+                      await Share.share(args["url"]);
+                    },
+                  ),
+              ),
+              Card(
+                color: Colors.black,
+                child: IconButton(
+                    color: Colors.black,
+                    icon: Icon(
+                      Icons.arrow_circle_down,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      image_Downlader(args["url"] , context);
+                    },
+                  ),
+              )
+            ],
+          ),
+          Material(
+            type: MaterialType.transparency,
+            child: Text(
+              _progress == null ?
+              " "
+              :
+              "${_progress.toString()} %",
+              style: TextStyle(
+                color: Colors.white
+              )
+                  
             ),
-            Card(
-              color: Colors.black,
-              child: IconButton(
-                  color: Colors.black,
-                  icon: Icon(
-                    Icons.ios_share_outlined,
-                    color: Colors.white,
-                  ),
-                  onPressed: () async {
-                    await Share.share(args["url"]);
-                  },
-                ),
-            ),
-            Card(
-              color: Colors.black,
-              child: IconButton(
-                  color: Colors.black,
-                  icon: Icon(
-                    Icons.arrow_circle_down,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    print("entra");
-                    image_Downlader(args["url"] , context);
-                  },
-                ),
-            )
-          ],
+          )
+          ]
         ),
       ),
     );

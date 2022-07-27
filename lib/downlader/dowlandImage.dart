@@ -5,19 +5,13 @@ import 'package:image_downloader/image_downloader.dart';
 
 import '../toast/index.dart';
 
-/* class DownladerImage extends StatefulWidget {
-  const DownladerImage({Key? key}) : super(key: key);
-
-  @override
-  State<DownladerImage> createState() => _DownladerImageState();
-}
-
-class _DownladerImageState extends State<DownladerImage> {
-  @override
-  Widget build(BuildContext context) {
-    
-  }
-} */
+/* 
+ImageDownloader.callback(onProgressUpdate: (String imageId, int _progress) {
+      setState(() {
+        progress = _progress;
+      });
+    });
+ */
 
 image_Downlader (url , context) async {
   try {
@@ -27,6 +21,7 @@ image_Downlader (url , context) async {
   if (imageId == null) {
     return;
   }
+  
   // Below is a method of obtaining saved image information.
   var fileName = await ImageDownloader.findName(imageId);
   var path = await ImageDownloader.findPath(imageId);
@@ -35,6 +30,6 @@ image_Downlader (url , context) async {
   showToast("Se ha descargado la imagen correctamente","success",5, context);
 
 } on PlatformException catch (error) {
-  print(error);
+  showToast(error.toString(),"error",5, context);
 }
 }

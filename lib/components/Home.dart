@@ -16,7 +16,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  Widget Card ({event ,  title , img , backColor}) {
+  Widget Card ({event ,  title , img }) {
     return Container(
       margin: EdgeInsets.all(10),
       width: 170,
@@ -28,22 +28,24 @@ class _HomeState extends State<Home> {
       ),
       child: ElevatedButton(
         onPressed: event,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children:[
-            SizedBox(
-              width: 100,
-              height: 100,
-              child: Image.asset(img),
-            ),
-            Text(
-              title, 
-              style: const TextStyle(
-                fontSize: 16,
-                color: Colors.white
-            ),),
-
-          ]
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children:[
+              SizedBox(
+                width: 100,
+                height: 100,
+                child: Image.asset(img),
+              ),
+              Text(
+                title, 
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.white
+              ),),
+        
+            ]
+          ),
         )),
     );
   }
