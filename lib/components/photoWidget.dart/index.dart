@@ -7,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:image_downloader/image_downloader.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:nasaapp/api/APOD/index.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../downlader/dowlandImage.dart';
@@ -24,7 +25,8 @@ class _PhotoWidgetState extends State<PhotoWidget> {
 
   var args;
   var key;
-  var _progress;
+  var _progress = 0;
+  bool isDownloading = false;
   bool loading = false;
 
 
@@ -65,6 +67,7 @@ class _PhotoWidgetState extends State<PhotoWidget> {
     widgetInit();
     ImageDownloader.callback(onProgressUpdate: (String? imageId, int progress) {
       setState(() {
+        isDownloading = true;
         _progress = progress;
       });
     });
@@ -191,19 +194,38 @@ class _PhotoWidgetState extends State<PhotoWidget> {
               )
             ],
           ),
-          Material(
-            type: MaterialType.transparency,
-            child: Text(
-              _progress == null ?
-              " "
-              :
-              "${_progress.toString()} %",
-              style: TextStyle(
-                color: Colors.white
-              )
-                  
+          if(_progress < 100) 
+          Column(
+            children: [
+              Visibility(
+                visible: isDownloading,
+                child: Material(
+                  type: MaterialType.transparency,
+                  child: Text(
+                    "Downloading, This could take a few seconds",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 13
+                  )),
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Visibility(
+                visible: isDownloading,
+                child: CircularPercentIndicator(
+                  progressColor: Colors.blue,
+                  radius: 40,
+                  percent: (_progress / 100),
+                  center: Text(
+                    "$_progress",
+                    style: TextStyle(
+                    color: Colors.white
+                  ))
+                ),
             ),
-          )
+          ]),
           ]
         ),
       ),
