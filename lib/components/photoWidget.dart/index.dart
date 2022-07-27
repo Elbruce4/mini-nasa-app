@@ -36,7 +36,6 @@ class _PhotoWidgetState extends State<PhotoWidget> {
     });
 
     key = await readData("string" , "pic");
-    print("key $key");
 
     if(key == "selectDate") {
       // ignore: use_build_context_synchronously
@@ -46,7 +45,6 @@ class _PhotoWidgetState extends State<PhotoWidget> {
       });
     } else if( key == "picOfDay") {
       var info = await getPictireOfTheDay(context);
-      print("info: $info");
       if (info is DioError) {
         showToast("Something went wrong", "error", 5, context);
       } else {
@@ -54,11 +52,14 @@ class _PhotoWidgetState extends State<PhotoWidget> {
           args = info;
       });
     }
-
     }
-    setState(() {
+    print(args);
+    new Future.delayed(const Duration(milliseconds: 5000), () {
+      setState(() {
       loading = false;
     });
+    });
+    
   }
 
   @override
@@ -86,36 +87,6 @@ class _PhotoWidgetState extends State<PhotoWidget> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]); */
-  }
-
-  Widget showOptions () {
-    return Card(
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton(
-          items: [
-            DropdownMenuItem(
-              value: "Download",
-              child: Center(
-                child: Text(
-                  "Download",
-                  style: TextStyle(fontSize: 32),
-                ),
-              ),
-            ),
-            DropdownMenuItem(
-              value: "Share",
-              child: Center(
-                child: Text(
-                  "Share",
-                  style: TextStyle(fontSize: 32),
-                ),
-              ),
-            )
-          ],
-          onChanged: (_) {},
-        ),
-      ),
-    );
   }
 
   
