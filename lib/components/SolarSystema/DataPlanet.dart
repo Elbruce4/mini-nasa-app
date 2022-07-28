@@ -21,45 +21,54 @@ class _DataPlanetsState extends State<DataPlanets> {
   var image;
 
   selectColor () {
+    print("widget.data :${widget.data}");
     switch (widget.name) {
       case "Jupiter":
         setState(() {
           image = "assets/ilustrations/jupiter.png";
+          widget.data["image"] = image;
         });
         break;
       case "Neptune":
         setState(() {
           image = "assets/ilustrations/neptune.png";
+          widget.data["image"] = image;
         });
         break;
       case "Uranus":
         setState(() {
           image = "assets/ilustrations/uranus.png";
+          widget.data["image"] = image;
         });
         break;
       case "Earth":
         setState(() {
           image = "assets/ilustrations/planet-earth.png";
+          widget.data["image"] = image;
         });
         break;
       case "Venus":
         setState(() {
           image = "assets/ilustrations/venus.png";
+          widget.data["image"] = image;
         });
         break;
       case "Mercury":
         setState(() {
           image = "assets/ilustrations/mercury.png";
+          widget.data["image"] = image;
         });
         break;
       case "Mars":
         setState(() {
           image = "assets/ilustrations/mars.png";
+          widget.data["image"] = image;
         });
         break;
       case "Saturn":
         setState(() {
           image = "assets/ilustrations/saturn.png";
+          widget.data["image"] = image;
         });
         break;
       default:

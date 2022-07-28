@@ -26,7 +26,9 @@ image_Downlader (url , context) async {
   var fileName = await ImageDownloader.findName(imageId);
   var path = await ImageDownloader.findPath(imageId);
   var size = await ImageDownloader.findByteSize(imageId);
+  print("size $size");
   var mimeType = await ImageDownloader.findMimeType(imageId);
+  print("type: $mimeType");
   showToast("Se ha descargado la imagen correctamente","success",5, context);
 
 } on PlatformException catch (error) {

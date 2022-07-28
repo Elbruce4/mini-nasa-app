@@ -54,7 +54,7 @@ class _EachAsteroidDetailState extends State<EachAsteroidDetail> {
             type: MaterialType.transparency,
             child: Container(
               width: 300,
-              height: 300,
+              height: 550,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -94,10 +94,10 @@ class _EachAsteroidDetailState extends State<EachAsteroidDetail> {
                     fontWeight: FontWeight.bold
                   )),
                   SizedBox(
-                    height: 50,
+                    height: 100,
                   ),
                   Container(
-                    height: 100,
+                    height: 200,
                     child: Column(
                       children:[ Text(
                       'Can this asteroid crash on earth?',

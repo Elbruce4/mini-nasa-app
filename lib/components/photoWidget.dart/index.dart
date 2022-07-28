@@ -104,6 +104,7 @@ class _PhotoWidgetState extends State<PhotoWidget> {
       child: Container(
         decoration: BoxDecoration(
           image: args != null ? DecorationImage(
+            opacity: showDesc ? 0.4 : 1,
             image: NetworkImage(args["url"]),
             fit: BoxFit.fitWidth
           )
@@ -177,17 +178,19 @@ class _PhotoWidgetState extends State<PhotoWidget> {
               SizedBox(
                 height: 15,
               ),
-              Material(
-                type: MaterialType.transparency,
-                child: Center(
-                  child: Text(
-                     args["title"],
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22
-                    )),
-                ),
-              ),],
+              if(args != null)
+                Material(
+                  type: MaterialType.transparency,
+                  child: Center(
+                    child: Text(
+                      args["title"],
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 22
+                      )),
+                  ),
+                )
+              ],
               ),
             if(_progress < 100) 
             Column(

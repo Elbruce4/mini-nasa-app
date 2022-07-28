@@ -17,10 +17,12 @@ class _DetailPlanetState extends State<DetailPlanet> {
 
   takeData() async {
     var info = ModalRoute.of(context)!.settings.arguments;//saco los argumentos que paso por ruta;
+    if(info != null) {
     setState(() {
       data = info;
     });
-    print(data);
+    }
+    print(data["image"]);
   }
 
   @override
@@ -33,9 +35,10 @@ class _DetailPlanetState extends State<DetailPlanet> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 29, 74, 219),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color(0xff0F69B3), width: 2),
+        image: DecorationImage(
+          image: AssetImage(data["image"]),
+          fit: BoxFit.cover
+        )
       ),
       child: Material(
         type: MaterialType.transparency,
@@ -45,6 +48,7 @@ class _DetailPlanetState extends State<DetailPlanet> {
             HeaderPop(),
             
             Container(
+              height: 500,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -52,14 +56,16 @@ class _DetailPlanetState extends State<DetailPlanet> {
                     "${data["name"]}",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 45
+                      fontSize: 45,
+                      fontWeight: FontWeight.bold
                   ),),
                   data["moons"] != null ? 
                   Text(
                     "Moons: ${data["moons"].length}",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 30
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold
                     ),)
                   :
                   (
@@ -67,54 +73,72 @@ class _DetailPlanetState extends State<DetailPlanet> {
                     "This planet has not any moon",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 30
+                      fontSize: 30,
+                      
+                      fontWeight: FontWeight.bold
                     ),)),
                   Text(
-                    "Gravity: ${data["gravity"]}",
+                    "Gravity: ${data["gravity"]} m/s²",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 30
+                      fontSize: 30,
+                      
+                      fontWeight: FontWeight.bold
                   ),),
                   Text(
-                    "Gravity: ${data["density"]}",
+                    "Density: ${data["density"]} gr/cm3",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 30
+                      fontSize: 30,
+                      
+                      fontWeight: FontWeight.bold
                   ),),
                   Text(
                     "Mass: ${data["mass"]["massValue"]}",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 30
+                      fontSize: 30,
+                      
+                      fontWeight: FontWeight.bold
                   ),),
                   Text(
-                    "Mass: ${data["vol"]["volValue"]}",
+                    "Vol: ${data["vol"]["volValue"]}",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 30
+                      fontSize: 30,
+                      
+                      fontWeight: FontWeight.bold
                   ),),
                   Text(
                     "Inclination: ${data["inclination"]}",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 30
+                      fontSize: 30,
+                      
+                      fontWeight: FontWeight.bold
                   ),),
                   data["discoveryDate"] != "" ? Container(
                     child: (
                     Column(
                       children: [
-                        Text(
-                          "Discover by: ${data["discoveredBy"]}",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20
-                        ),),
-                        Text(
-                          "Discover on: ${data["discoveryDate"]}",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20
-                        )
+                        Center(
+                          child: Text(
+                            "Discover by: ${data["discoveredBy"]}",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold
+                          ),),
+                        ),
+                        Center(
+                          child: Text(
+                            "Discover on: ${data["discoveryDate"]}",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold
+                          )
+                          ),
                         ),
                       ],
                     )
@@ -125,17 +149,19 @@ class _DetailPlanetState extends State<DetailPlanet> {
                   Center(
                     child: (
                     Text(
-                      "No info abaout who or when this planet was discover",
+                      "No info about who or when this planet was discover",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 20
+                        fontSize: 15
                       ),)),
                   ),
                   Text(
                     "Radio: ${data["meanRadius"]}",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 30
+                      fontSize: 30,
+                      
+                      fontWeight: FontWeight.bold
                   ),),
       
                 ],
